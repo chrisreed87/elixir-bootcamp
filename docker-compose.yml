@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:12.7-alpine
+    ports:
+      - "5432:5432"
+    volumes_from:
+      - pgdata
+    environment:
+      POSTGRES_USER: db
+      POSTGRES_PASSWORD: db
+      POSTGRES_DB: db
+  pgdata:
+    image: busybox
