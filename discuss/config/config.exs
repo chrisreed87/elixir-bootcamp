@@ -12,7 +12,7 @@ config :discuss,
 # Configures the endpoint
 config :discuss, Discuss.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "cAXOXlYAKQ6Rdejs4VQhP88cuxZ8onLZN+gMfo8aT7hNX7WZnRt5/ChD6CvvOthX",
+  secret_key_base: "<github-secret>",
   render_errors: [view: Discuss.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Discuss.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -25,3 +25,12 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :ueberauth, Ueberauth,
+       providers: [
+         github: { Ueberauth.Strategy.Github, [default_scope: "user, public_repo"] }
+       ]
+
+config :ueberauth, Ueberauth.Strategy.Github.OAuth,
+       client_id: "<client-id>",
+       client_secret: "<client-secret>"
